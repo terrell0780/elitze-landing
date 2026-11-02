@@ -21,19 +21,24 @@
     }
   ],
   "rewrites": [
-    { "source": "/dashboard", "destination": "https://YOUR-APP-HOST.vercel.app/dashboard" },
-    { "source": "/dashboard/:path*", "destination": "https://YOUR-APP-HOST.vercel.app/dashboard/:path*" },
-    { "source": "/chat", "destination": "https://YOUR-APP-HOST.vercel.app/chat" },
-    { "source": "/chat/:path*", "destination": "https://YOUR-APP-HOST.vercel.app/chat/:path*" },
-    { "source": "/sign-in", "destination": "https://YOUR-APP-HOST.vercel.app/sign-in" },
-    { "source": "/sign-in/:path*", "destination": "https://YOUR-APP-HOST.vercel.app/sign-in/:path*" },
-    { "source": "/sign-up", "destination": "https://YOUR-APP-HOST.vercel.app/sign-up" },
-    { "source": "/integrations", "destination": "https://YOUR-APP-HOST.vercel.app/integrations" },
-    { "source": "/integrations/:path*", "destination": "https://YOUR-APP-HOST.vercel.app/integrations/:path*" },
-    { "source": "/docs", "destination": "https://YOUR-APP-HOST.vercel.app/docs" },
-    { "source": "/docs/:path*", "destination": "https://YOUR-APP-HOST.vercel.app/docs/:path*" },
-    { "source": "/faq", "destination": "https://YOUR-APP-HOST.vercel.app/faq" },
-    { "source": "/about", "destination": "https://YOUR-APP-HOST.vercel.app/about" },
-    { "source": "/api/:path*", "destination": "https://YOUR-APP-HOST.vercel.app/api/:path*" }
+    { "source": "/console", "destination": "https://YOUR-APP-HOST/console" },
+    { "source": "/console/:path*", "destination": "https://YOUR-APP-HOST/console/:path*" },
+    { "source": "/chat", "destination": "https://YOUR-APP-HOST/chat" },
+    { "source": "/chat/:path*", "destination": "https://YOUR-APP-HOST/chat/:path*" },
+    { "source": "/orchestration", "destination": "https://YOUR-APP-HOST/orchestration" },
+    { "source": "/orchestration/:path*", "destination": "https://YOUR-APP-HOST/orchestration/:path*" },
+    { "source": "/recursive-agents", "destination": "https://YOUR-APP-HOST/recursive-agents" },
+    { "source": "/recursive-agents/:path*", "destination": "https://YOUR-APP-HOST/recursive-agents/:path*" },
+    { "source": "/login", "destination": "https://YOUR-APP-HOST/login" },
+    { "source": "/login/:path*", "destination": "https://YOUR-APP-HOST/login/:path*" },
+    { "source": "/docs", "destination": "https://YOUR-APP-HOST/docs" },
+    { "source": "/docs/:path*", "destination": "https://YOUR-APP-HOST/docs/:path*" },
+    { "source": "/faq", "destination": "https://YOUR-APP-HOST/faq" },
+    { "source": "/how-to", "destination": "https://YOUR-APP-HOST/how-to" },
+    { "source": "/how-to/:path*", "destination": "https://YOUR-APP-HOST/how-to/:path*" },
+    { "source": "/about", "destination": "https://YOUR-APP-HOST/about" },
+    { "source": "/contact", "destination": "https://YOUR-APP-HOST/contact" },
+    { "source": "/api/:path*", "destination": "https://YOUR-APP-HOST/api/:path*" },
+    { "source": "/_next/:path*", "destination": "https://YOUR-APP-HOST/_next/:path*" }
   ]
 }
