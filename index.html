@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elitze — security operations for the agent era</title>
+<meta name="description" content="Elitze is a security workspace for teams running AI agents: governed tool access, evidence-backed posture, and authorized validation. Victoria BC. Fixed price, Interac e-Transfer.">
+<meta property="og:title" content="Elitze — security operations for the agent era">
+<meta property="og:description" content="Governed agent access, evidence-backed posture, authorized validation. Fixed price. Victoria BC.">
+<meta property="og:type" content="website">
+<style>
+  :root{
+    --bg:#08060f; --panel:#120c1f; --panel2:#0e0a19; --ink:#ece9ff; --muted:#a49cc0;
+    --violet:#8b5cf6; --cyan:#22d3ee; --gold:#fbbf24; --line:#241a3b; --ok:#34d399;
+    --max:1080px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:
+      radial-gradient(900px 480px at 15% -12%, #1d1135 0%, transparent 60%),
+      radial-gradient(700px 400px at 92% 8%, #0c2a33 0%, transparent 55%),
+      var(--bg);
+    color:var(--ink);
+    font:16px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Inter,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--cyan);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
+  header{
+    position:sticky;top:0;z-index:20;backdrop-filter:blur(10px);
+    background:rgba(8,6,15,.82);border-bottom:1px solid var(--line);
+  }
+  .bar{display:flex;align-items:center;justify-content:space-between;height:64px;gap:18px}
+  .logo{font-weight:800;letter-spacing:.6px;font-size:18px}
+  .logo i{font-style:normal;color:var(--cyan)}
+  nav{display:flex;gap:22px;align-items:center}
+  nav a{color:var(--muted);font-size:14.5px}
+  nav a:hover{color:var(--ink);text-decoration:none}
+  .btn{
+    display:inline-block;padding:11px 18px;border-radius:11px;font-weight:650;font-size:14.5px;
+    border:1px solid transparent;white-space:nowrap;
+  }
+  .btn.primary{background:linear-gradient(90deg,var(--violet),#6d28d9);color:#fff;box-shadow:0 12px 30px -14px var(--violet)}
+  .btn.ghost{border-color:var(--line);color:var(--ink)}
+  .btn.ghost:hover{border-color:#3d2c63;text-decoration:none}
+  @media (max-width:820px){ nav .hide-sm{display:none} }
+
+  /* hero */
+  .hero{padding:76px 0 40px;text-align:left}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;font-size:12.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--muted);border:1px solid var(--line);
+    padding:6px 12px;border-radius:999px;margin-bottom:22px;
+  }
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok)}
+  h1{font-size:clamp(32px,5.4vw,56px);line-height:1.08;margin:0 0 18px;letter-spacing:-.5px}
+  h1 em{font-style:normal;background:linear-gradient(90deg,var(--cyan),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{font-size:clamp(16px,2vw,19px);color:var(--muted);max-width:62ch;margin:0 0 30px}
+  .cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px}
+  .facts{display:flex;gap:22px;flex-wrap:wrap;color:var(--muted);font-size:13.5px;border-top:1px solid var(--line);padding-top:20px}
+
+  /* sections */
+  section{padding:56px 0;border-top:1px solid var(--line)}
+  h2{font-size:clamp(22px,3vw,30px);margin:0 0 10px;letter-spacing:-.3px}
+  .lede{color:var(--muted);max-width:66ch;margin:0 0 30px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+  .card{
+    background:linear-gradient(180deg,var(--panel),var(--panel2));
+    border:1px solid var(--line);border-radius:15px;padding:20px;
+  }
+  .card h3{margin:0 0 8px;font-size:17px}
+  .card p{margin:0;color:var(--muted);font-size:14.5px}
+  .card .tag{font-size:11.5px;color:var(--cyan);letter-spacing:.08em;text-transform:uppercase}
+
+  .price{font-size:28px;font-weight:800;color:var(--gold);margin:10px 0 4px}
+  .price small{font-size:13px;color:var(--muted);font-weight:500}
+  .card ul{margin:12px 0 0 18px;padding:0;color:var(--muted);font-size:14.5px}
+  .card li{margin:6px 0}
+
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+  .step{border-left:2px solid var(--cyan);padding-left:14px;color:var(--muted);font-size:14.5px}
+  .step b{display:block;color:var(--ink);margin-bottom:4px;font-size:15px}
+
+  .work{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+  .work a{display:block;border:1px solid var(--line);border-radius:15px;padding:18px;color:var(--ink)}
+  .work a:hover{border-color:#3d2c63;text-decoration:none}
+  .work b{font-size:15.5px}
+  .work span{display:block;color:var(--muted);font-size:14px;margin-top:6px}
+
+  .note{
+    background:#0d0a18;border:1px dashed #3b2a5e;border-radius:14px;padding:18px 20px;
+    color:var(--muted);font-size:14.5px;
+  }
+  .note b{color:var(--gold)}
+
+  footer{padding:40px 0 60px;color:#6f6788;font-size:13px;border-top:1px solid var(--line)}
+  footer nav{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:16px}
+  footer a{color:#8d84a8}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <div class="logo">ELITZE<i>.</i></div>
+    <nav>
+      <a href="#product" class="hide-sm">Product</a>
+      <a href="#pricing" class="hide-sm">Pricing</a>
+      <a href="#work" class="hide-sm">Work</a>
+      <a href="#contact" class="btn primary">Request a review</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div class="eyebrow"><span class="dot"></span> Victoria, BC · remote across Canada</div>
+    <h1>Your agents can take action.<br><em>Can you prove they were allowed to?</em></h1>
+    <p class="sub">
+      Elitze is a security workspace for teams running AI agents in production: it shows what agents
+      can reach, gates the actions that matter, and keeps evidence you can hand to an auditor —
+      not screenshots, records.
+    </p>
+    <div class="cta">
+      <a class="btn primary" href="mailto:terrell0780@gmail.com?subject=Elitze%20—%20scope%20call">Request a scope call</a>
+      <a class="btn ghost" href="https://elitze.info/dashboard">Open the workspace →</a>
+    </div>
+    <div class="facts">
+      <span>Fixed price agreed in writing</span>
+      <span>Interac e-Transfer · invoice net 7</span>
+      <span>Authorized scope only</span>
+    </div>
+  </div>
+
+  <section id="product">
+    <div class="wrap">
+      <h2>One workspace, three jobs that actually matter</h2>
+      <p class="lede">
+        Most "AI security" tools produce a dashboard nobody reads. Elitze is organised around the three
+        questions a team is asked the day after an incident.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <div class="tag">Investigate</div>
+          <h3>What can the agent reach?</h3>
+          <p>Observed assets, tool boundaries and relationship paths, drawn from real telemetry — with
+             the gaps labelled as gaps instead of guessed.</p>
+        </div>
+        <div class="card">
+          <div class="tag">Validate</div>
+          <h3>Would the control hold?</h3>
+          <p>Scope-bound validation workflows: prove a deny rule actually denies, and that an approval
+             can't be replayed. Nothing runs outside the written scope.</p>
+        </div>
+        <div class="card">
+          <div class="tag">Evidence</div>
+          <h3>Can you show the auditor?</h3>
+          <p>Every action is recorded with its authorization basis and outcome. Export the trail
+             rather than reconstructing it from memory.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="wrap">
+      <h2>Fixed price. Written scope. No retainers.</h2>
+      <p class="lede">Engagements are small and defined. You know the number and the delivery date before work starts.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>Quick Pass</h3>
+          <div class="price">$500 <small>CAD · 3 business days</small></div>
+          <ul>
+            <li>Static review of the shipped artifact</li>
+            <li>Tool-permission &amp; credential walkthrough</li>
+            <li>Findings memo with fixes</li>
+          </ul>
+        </div>
+        <div class="card" style="border-color:#4c2f8a">
+          <h3>Full Review</h3>
+          <div class="price">$1,500 <small>CAD · 7–10 business days</small></div>
+          <ul>
+            <li>Everything in Quick Pass</li>
+            <li>Agent tool-surface threat model</li>
+            <li>Approval / replay / idempotency analysis</li>
+            <li>Validation against your staging env, in scope</li>
+            <li>Prioritised remediation + retest</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Build &amp; Harden</h3>
+          <div class="price">from $2,500 <small>CAD · scoped</small></div>
+          <ul>
+            <li>Implement the prescribed controls</li>
+            <li>Authz gates, output scrubbing, audit logging</li>
+            <li>CI checks + regression tests</li>
+          </ul>
+        </div>
+      </div>
+      <p class="note" style="margin-top:22px">
+        <b>How to engage:</b> email with what you're running and what worries you. You get a
+        one-paragraph scope and an exact price — usually same day. Nothing is tested until the scope
+        is written and signed.
+      </p>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <h2>Proof, not claims</h2>
+      <p class="lede">Both of these you can open and run right now.</p>
+      <div class="work">
+        <a href="https://github.com/terrell0780/servicedesk-demo">
+          <b>ServiceDesk API →</b>
+          <span>FastAPI + SQLite billing-adjacent backend: clients → jobs → invoices, live outstanding
+                balance, 12 passing tests, one-command Docker build.</span>
+        </a>
+        <a href="https://github.com/terrell0780/Elitze-Secure">
+          <b>Elitze-Secure →</b>
+          <span>Agentic security tooling: multi-agent fleet, TLS/header analysis, compliance-gated
+                outbound actions with a human approval gate on every send.</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>How it runs</h2>
+      <div class="steps">
+        <div class="step"><b>1 · Scope call (30 min)</b>What you run, what worries you, what's out of bounds. Written scope follows the call.</div>
+        <div class="step"><b>2 · Review</b>Static analysis and manual review of the agent/tool paths. Findings written as they're found.</div>
+        <div class="step"><b>3 · Report &amp; retest</b>Severity-ranked, reproduction steps, a fix per finding, then a retest of the fixes.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <h2>Talk to a human</h2>
+      <p class="lede">
+        Elitze is run by Terrell Hall in Victoria, BC. Email reaches me directly — no form, no funnel.
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="mailto:terrell0780@gmail.com?subject=Elitze%20—%20security%20review">terrell0780@gmail.com</a>
+        <a class="btn ghost" href="https://github.com/terrell0780">github.com/terrell0780</a>
+      </div>
+      <p class="note">
+        <b>Boundary:</b> nothing is scanned, probed or tested without written authorization and a
+        defined scope. Unsolicited testing is not a service I offer — to anyone.
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <nav>
+      <a href="#product">Product</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#work">Work</a>
+      <a href="https://elitze.info/docs">Docs</a>
+      <a href="https://elitze.info/faq">FAQ</a>
+      <a href="mailto:terrell0780@gmail.com">Contact</a>
+    </nav>
+    <div>
+      Elitze · Terrell Hall · Victoria, BC, Canada · Interac e-Transfer · invoices net 7<br>
+      © <span id="yr">2026</span> Elitze. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>
