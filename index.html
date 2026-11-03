@@ -81,6 +81,12 @@
   .card li{margin:6px 0}
 
   .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+  .loop{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:20px 0 26px}
+  .loop span{font:12.5px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink);
+    border:1px solid var(--line);background:var(--panel2);padding:7px 11px;border-radius:9px}
+  .loop b{color:var(--cyan);font-weight:600;font-size:12.5px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .chips span{font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:5px 11px}
   .step{border-left:2px solid var(--cyan);padding-left:14px;color:var(--muted);font-size:14.5px}
   .step b{display:block;color:var(--ink);margin-bottom:4px;font-size:15px}
 
@@ -138,29 +144,47 @@
 
   <section id="product">
     <div class="wrap">
-      <h2>One workspace, three jobs that actually matter</h2>
+      <h2>Agent identity and MCP runtime security</h2>
       <p class="lede">
-        Most "AI security" tools produce a dashboard nobody reads. Elitze is organised around the three
-        questions a team is asked the day after an incident.
+        Discover every agent and MCP server, map what each identity can reach, enforce policy before
+        sensitive tool execution, and preserve verifiable evidence of every decision.
       </p>
-      <div class="grid">
+
+      <div class="loop">
+        <span>Discover</span><b>→</b><span>Identify</span><b>→</b><span>Map Reach</span><b>→</b>
+        <span>Evaluate Policy</span><b>→</b><span>Decide</span><b>→</b><span>Authorize Execution</span><b>→</b>
+        <span>Observe</span><b>→</b><span>Retest</span><b>→</b><span>Prove</span>
+      </div>
+      <p class="lede" style="font-size:14.5px;margin-top:-6px">
+        A dashboard changing state is not the control. The tenant-scoped record, the authorization
+        decision, the execution result, the retest result and the evidence must all exist in the
+        connected path.
+      </p>
+
+      <div class="grid" style="margin-top:26px">
         <div class="card">
-          <div class="tag">Investigate</div>
-          <h3>What can the agent reach?</h3>
-          <p>Observed assets, tool boundaries and relationship paths, drawn from real telemetry — with
-             the gaps labelled as gaps instead of guessed.</p>
+          <div class="tag">Initial integration wave</div>
+          <h3>Five ecosystems, real adapter paths</h3>
+          <p>Provider-specific paths that participate in the control plane — not passive imports.</p>
+          <div class="chips">
+            <span>MCP gateway / server</span><span>GitHub + Actions</span><span>AWS IAM + CloudTrail</span>
+            <span>Entra ID + Azure</span><span>Kubernetes</span>
+          </div>
         </div>
         <div class="card">
-          <div class="tag">Validate</div>
-          <h3>Would the control hold?</h3>
-          <p>Scope-bound validation workflows: prove a deny rule actually denies, and that an approval
-             can't be replayed. Nothing runs outside the written scope.</p>
+          <div class="tag">Security surface</div>
+          <h3>What gets governed</h3>
+          <p>Agent and MCP tool inventory · non-human identity · identity-to-capability reachability ·
+             secrets reachability · policy enforcement before sensitive tool execution · approval
+             boundaries · tamper-evident decision evidence · observed runtime outcomes · retest closure.</p>
         </div>
         <div class="card">
-          <div class="tag">Evidence</div>
-          <h3>Can you show the auditor?</h3>
-          <p>Every action is recorded with its authorization basis and outcome. Export the trail
-             rather than reconstructing it from memory.</p>
+          <div class="tag">Production truth</div>
+          <h3>No mock data. Ever.</h3>
+          <p>Real connected records only — no synthetic telemetry, no placeholder success states, no
+             invented customers or savings. Missing evidence stays <code>UNKNOWN</code>,
+             <code>UNMEASURABLE</code> or <code>INSUFFICIENT_REACH</code>. A connector counts as
+             <code>INTEGRATED</code> only after a live authenticated provider path is verified.</p>
         </div>
       </div>
     </div>
