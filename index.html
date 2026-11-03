@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Elitze Agentic Security — security operations for the agent era</title>
-<meta name="description" content="Elitze Agentic Security is a workspace for teams running AI agents: governed tool access, evidence-backed posture, and authorized validation. Victoria BC. Fixed price, Interac e-Transfer.">
-<meta property="og:title" content="Elitze Agentic Security — security operations for the agent era">
-<meta property="og:description" content="Governed agent access, evidence-backed posture, authorized validation. Fixed price. Victoria BC.">
+<title>Elitze Agentic Security — agent identity &amp; MCP runtime security</title>
+<meta name="description" content="Discover every agent and MCP server, map what each identity can reach, enforce policy before sensitive tool execution, and keep verifiable evidence of every decision. Fixed-price reviews. Victoria BC.">
+<meta property="og:title" content="Elitze Agentic Security — agent identity &amp; MCP runtime security">
+<meta property="og:description" content="Discover agents and MCP servers, map reach, enforce policy before tool execution, prove it with evidence.">
 <meta property="og:type" content="website">
+<meta name="theme-color" content="#08060f">
 <style>
   :root{
     --bg:#08060f; --panel:#120c1f; --panel2:#0e0a19; --ink:#ece9ff; --muted:#a49cc0;
@@ -17,123 +18,120 @@
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{
-    margin:0;background:
+    margin:0;
+    background:
       radial-gradient(900px 480px at 15% -12%, #1d1135 0%, transparent 60%),
       radial-gradient(700px 400px at 92% 8%, #0c2a33 0%, transparent 55%),
       var(--bg);
     color:var(--ink);
-    font:16px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Inter,sans-serif;
+    font:16px/1.62 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Inter,sans-serif;
     -webkit-font-smoothing:antialiased;
   }
   a{color:var(--cyan);text-decoration:none}
   a:hover{text-decoration:underline}
+  code{font:13px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--gold);background:#150e26;padding:1px 5px;border-radius:5px}
   .wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
-  header{
-    position:sticky;top:0;z-index:20;backdrop-filter:blur(10px);
-    background:rgba(8,6,15,.82);border-bottom:1px solid var(--line);
-  }
-  .bar{display:flex;align-items:center;justify-content:space-between;height:64px;gap:18px}
+
+  header{position:sticky;top:0;z-index:20;background:rgba(8,6,15,.86);border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}
+  .bar{display:flex;align-items:center;justify-content:space-between;height:66px;gap:16px}
   .logo{font-weight:800;letter-spacing:.6px;font-size:18px}
   .logo i{font-style:normal;color:var(--cyan)}
-  .sub-brand{font-weight:500;font-size:12.5px;letter-spacing:.10em;text-transform:uppercase;color:var(--muted);margin-left:8px}
-  nav{display:flex;gap:22px;align-items:center}
+  .brand-sub{font-weight:500;font-size:12.5px;letter-spacing:.10em;text-transform:uppercase;color:var(--muted);margin-left:8px}
+  nav{display:flex;gap:20px;align-items:center}
   nav a{color:var(--muted);font-size:14.5px}
   nav a:hover{color:var(--ink);text-decoration:none}
-  .btn{
-    display:inline-block;padding:11px 18px;border-radius:11px;font-weight:650;font-size:14.5px;
-    border:1px solid transparent;white-space:nowrap;
-  }
+  .btn{display:inline-block;padding:11px 18px;border-radius:11px;font-weight:650;font-size:14.5px;border:1px solid transparent}
   .btn.primary{background:linear-gradient(90deg,var(--violet),#6d28d9);color:#fff;box-shadow:0 12px 30px -14px var(--violet)}
   .btn.ghost{border-color:var(--line);color:var(--ink)}
   .btn.ghost:hover{border-color:#3d2c63;text-decoration:none}
-  @media (max-width:820px){ nav .hide-sm{display:none} }
+  @media (max-width:880px){ nav .hide-sm{display:none} }
 
-  /* hero */
-  .hero{padding:76px 0 40px;text-align:left}
-  .eyebrow{
-    display:inline-flex;align-items:center;gap:8px;font-size:12.5px;letter-spacing:.14em;
-    text-transform:uppercase;color:var(--muted);border:1px solid var(--line);
-    padding:6px 12px;border-radius:999px;margin-bottom:22px;
-  }
+  .hero{padding:74px 0 44px}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:6px 12px;border-radius:999px;margin-bottom:22px}
   .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok)}
-  h1{font-size:clamp(32px,5.4vw,56px);line-height:1.08;margin:0 0 18px;letter-spacing:-.5px}
+  h1{font-size:clamp(32px,5.2vw,54px);line-height:1.09;margin:0 0 18px;letter-spacing:-.5px}
   h1 em{font-style:normal;background:linear-gradient(90deg,var(--cyan),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .sub{font-size:clamp(16px,2vw,19px);color:var(--muted);max-width:62ch;margin:0 0 30px}
-  .cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px}
-  .facts{display:flex;gap:22px;flex-wrap:wrap;color:var(--muted);font-size:13.5px;border-top:1px solid var(--line);padding-top:20px}
+  .sub{font-size:clamp(16px,2vw,19px);color:var(--muted);max-width:64ch;margin:0 0 28px}
+  .cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+  .signin{font-size:13.5px;color:var(--muted)}
+  .facts{display:flex;gap:22px;flex-wrap:wrap;color:var(--muted);font-size:13.5px;border-top:1px solid var(--line);padding-top:20px;margin-top:26px}
 
-  /* sections */
-  section{padding:56px 0;border-top:1px solid var(--line)}
+  section{padding:54px 0;border-top:1px solid var(--line)}
   h2{font-size:clamp(22px,3vw,30px);margin:0 0 10px;letter-spacing:-.3px}
-  .lede{color:var(--muted);max-width:66ch;margin:0 0 30px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
-  .card{
-    background:linear-gradient(180deg,var(--panel),var(--panel2));
-    border:1px solid var(--line);border-radius:15px;padding:20px;
-  }
-  .card h3{margin:0 0 8px;font-size:17px}
+  h3{font-size:17px;margin:0 0 8px}
+  .lede{color:var(--muted);max-width:68ch;margin:0 0 26px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:16px}
+  .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:15px;padding:20px}
   .card p{margin:0;color:var(--muted);font-size:14.5px}
-  .card .tag{font-size:11.5px;color:var(--cyan);letter-spacing:.08em;text-transform:uppercase}
-
-  .price{font-size:28px;font-weight:800;color:var(--gold);margin:10px 0 4px}
-  .price small{font-size:13px;color:var(--muted);font-weight:500}
   .card ul{margin:12px 0 0 18px;padding:0;color:var(--muted);font-size:14.5px}
-  .card li{margin:6px 0}
+  .card li{margin:5px 0}
+  .tag{font-size:11.5px;color:var(--cyan);letter-spacing:.08em;text-transform:uppercase}
+  .tag.small{font-size:11px}
 
-  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-  .loop{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:20px 0 26px}
+  .loop{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:22px 0 18px}
   .loop span{font:12.5px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink);
     border:1px solid var(--line);background:var(--panel2);padding:7px 11px;border-radius:9px}
   .loop b{color:var(--cyan);font-weight:600;font-size:12.5px}
-  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
-  .chips span{font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:5px 11px}
-  .step{border-left:2px solid var(--cyan);padding-left:14px;color:var(--muted);font-size:14.5px}
-  .step b{display:block;color:var(--ink);margin-bottom:4px;font-size:15px}
+  .loop-note{color:var(--muted);font-size:14.5px;margin:0;max-width:70ch}
 
+  .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .chips span{font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:5px 11px}
+
+  .endpoints{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+  .endpoints li{font:13px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);
+    border-left:2px solid var(--line);padding-left:12px}
+  .endpoints b{color:var(--ink);font-weight:600}
+
+  .note{background:#0d0a18;border:1px dashed #3b2a5e;border-radius:14px;padding:18px 20px;color:var(--muted);font-size:14.5px}
+  .note b{color:var(--gold)}
+
+  .price{font-size:28px;font-weight:800;color:var(--gold);margin:10px 0 4px}
+  .price small{font-size:13px;color:var(--muted);font-weight:500}
+  .card.featured{border-color:#4c2f8a}
+
+  .quote{border-left:3px solid var(--violet);padding:4px 0 4px 18px;margin:0 0 18px;
+    font-size:clamp(19px,2.4vw,24px);line-height:1.4}
   .work{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
   .work a{display:block;border:1px solid var(--line);border-radius:15px;padding:18px;color:var(--ink)}
   .work a:hover{border-color:#3d2c63;text-decoration:none}
   .work b{font-size:15.5px}
   .work span{display:block;color:var(--muted);font-size:14px;margin-top:6px}
 
-  .note{
-    background:#0d0a18;border:1px dashed #3b2a5e;border-radius:14px;padding:18px 20px;
-    color:var(--muted);font-size:14.5px;
-  }
-  .note b{color:var(--gold)}
-
-  footer{padding:40px 0 60px;color:#6f6788;font-size:13px;border-top:1px solid var(--line)}
+  footer{padding:40px 0 64px;color:#6f6788;font-size:13px;border-top:1px solid var(--line)}
   footer nav{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:16px}
   footer a{color:#8d84a8}
-  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
 </head>
 <body>
 
 <header>
   <div class="wrap bar">
-    <div class="logo">ELITZE<i>.</i> <span class="sub-brand">Agentic Security</span></div>
-    <nav>
-      <a href="#product" class="hide-sm">Product</a>
-      <a href="#pricing" class="hide-sm">Pricing</a>
-      <a href="#work" class="hide-sm">Work</a>
-      <a href="#contact" class="btn primary">Request a review</a>
+    <div class="logo">ELITZE<i>.</i> <span class="brand-sub">Agentic Security</span></div>
+    <nav aria-label="Main">
+      <a href="#loop" class="hide-sm">Control loop</a>
+      <a href="#surface" class="hide-sm">What it governs</a>
+      <a href="#proof" class="hide-sm">Proof</a>
+      <a href="#engagements" class="hide-sm">Engagements</a>
+      <a href="#contact" class="btn primary">Request a scope call</a>
     </nav>
   </div>
 </header>
 
 <main>
   <div class="wrap hero">
-    <div class="eyebrow"><span class="dot"></span> Elitze Agentic Security · Victoria, BC · remote across Canada</div>
+    <div class="eyebrow"><span class="dot"></span> Victoria, BC · remote across Canada</div>
     <h1>Your agents can take action.<br><em>Can you prove they were allowed to?</em></h1>
     <p class="sub">
-      Elitze is a security workspace for teams running AI agents in production: it shows what agents
-      can reach, gates the actions that matter, and keeps evidence you can hand to an auditor —
-      not screenshots, records.
+      Elitze Agentic Security discovers every agent and MCP server, maps what each identity can reach,
+      enforces policy before sensitive tool execution, and preserves verifiable evidence of every
+      decision — the full chain, not a dashboard that says "secure".
     </p>
     <div class="cta">
       <a class="btn primary" href="mailto:terrell0780@gmail.com?subject=Elitze%20—%20scope%20call">Request a scope call</a>
-      <a class="btn ghost" href="https://www.elitze.info/console">Open the workspace →</a>
+      <a class="btn ghost" href="#loop">See the control loop</a>
+      <span class="signin">Existing tenant? <a href="https://www.elitze.info/login">Sign in to the workspace →</a></span>
     </div>
     <div class="facts">
       <span>Fixed price agreed in writing</span>
@@ -142,77 +140,254 @@
     </div>
   </div>
 
-  <section id="product">
+  <section id="loop">
     <div class="wrap">
-      <h2>Agent identity and MCP runtime security</h2>
+      <h2>The initial control loop</h2>
       <p class="lede">
-        Discover every agent and MCP server, map what each identity can reach, enforce policy before
-        sensitive tool execution, and preserve verifiable evidence of every decision.
+        Nine steps, in order. Each one leaves a tenant-scoped record — the authorization decision, the
+        execution result, the retest result, the evidence.
       </p>
-
       <div class="loop">
         <span>Discover</span><b>→</b><span>Identify</span><b>→</b><span>Map Reach</span><b>→</b>
         <span>Evaluate Policy</span><b>→</b><span>Decide</span><b>→</b><span>Authorize Execution</span><b>→</b>
         <span>Observe</span><b>→</b><span>Retest</span><b>→</b><span>Prove</span>
       </div>
-      <p class="lede" style="font-size:14.5px;margin-top:-6px">
-        A dashboard changing state is not the control. The tenant-scoped record, the authorization
-        decision, the execution result, the retest result and the evidence must all exist in the
-        connected path.
+      <p class="loop-note">
+        A system is not complete because a dashboard state changed. The record, the decision, the
+        execution and the evidence must exist in the connected path.
       </p>
+    </div>
+  </section>
 
-      <div class="grid" style="margin-top:26px">
+  <section id="surface">
+    <div class="wrap">
+      <h2>What gets governed</h2>
+      <p class="lede">
+        The initial security surface is deliberately narrow: the agent and MCP paths where a wrong
+        decision reaches real systems.
+      </p>
+      <div class="cols">
         <div class="card">
-          <div class="tag">Initial integration wave</div>
-          <h3>Five ecosystems, real adapter paths</h3>
-          <p>Provider-specific paths that participate in the control plane — not passive imports.</p>
-          <div class="chips">
-            <span>MCP gateway / server</span><span>GitHub + Actions</span><span>AWS IAM + CloudTrail</span>
-            <span>Entra ID + Azure</span><span>Kubernetes</span>
-          </div>
+          <div class="tag">Inventory</div>
+          <h3>Agents, servers, tools</h3>
+          <ul>
+            <li>Agent discovery and inventory</li>
+            <li>MCP server and tool inventory</li>
+            <li>Workload / non-human identity</li>
+          </ul>
         </div>
         <div class="card">
-          <div class="tag">Security surface</div>
-          <h3>What gets governed</h3>
-          <p>Agent and MCP tool inventory · non-human identity · identity-to-capability reachability ·
-             secrets reachability · policy enforcement before sensitive tool execution · approval
-             boundaries · tamper-evident decision evidence · observed runtime outcomes · retest closure.</p>
+          <div class="tag">Reach</div>
+          <h3>Identity → capability</h3>
+          <ul>
+            <li>Identity-to-capability mapping</li>
+            <li>Reachability paths</li>
+            <li>Secrets and sensitive-data reachability</li>
+          </ul>
         </div>
         <div class="card">
-          <div class="tag">Production truth</div>
-          <h3>No mock data. Ever.</h3>
-          <p>Real connected records only — no synthetic telemetry, no placeholder success states, no
-             invented customers or savings. Missing evidence stays <code>UNKNOWN</code>,
-             <code>UNMEASURABLE</code> or <code>INSUFFICIENT_REACH</code>. A connector counts as
-             <code>INTEGRATED</code> only after a live authenticated provider path is verified.</p>
+          <div class="tag">Enforcement</div>
+          <h3>Before the tool runs</h3>
+          <ul>
+            <li>Policy enforcement before sensitive tool execution</li>
+            <li>Approval boundaries for high-impact actions</li>
+            <li>Separately authorized gateway execution</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="tag">Evidence</div>
+          <h3>After it runs</h3>
+          <ul>
+            <li>Tamper-evident decision evidence</li>
+            <li>Observed runtime outcomes</li>
+            <li>Retesting and evidence-backed closure</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="pricing">
+  <section id="integrations">
     <div class="wrap">
-      <h2>Fixed price. Written scope. No retainers.</h2>
-      <p class="lede">Engagements are small and defined. You know the number and the delivery date before work starts.</p>
+      <h2>Five ecosystems, real adapter paths</h2>
+      <p class="lede">
+        Provider-specific adapters that participate in the control plane — not passive data imports.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <div class="tag">1</div>
+          <h3>MCP gateway / server</h3>
+          <p>Authenticated server discovery and tool inventory along the 2026-07-28 protocol path.</p>
+        </div>
+        <div class="card">
+          <div class="tag">2</div>
+          <h3>GitHub + GitHub Actions</h3>
+          <p>Repositories and workflow runs, for source and release identity evidence.</p>
+        </div>
+        <div class="card">
+          <div class="tag">3</div>
+          <h3>AWS IAM + CloudTrail</h3>
+          <p>Authenticated CloudTrail activity for AWS identity and runtime evidence.</p>
+        </div>
+        <div class="card">
+          <div class="tag">4</div>
+          <h3>Microsoft Entra ID + Azure</h3>
+          <p>Microsoft Graph directory context for identity and authorization evidence.</p>
+        </div>
+        <div class="card">
+          <div class="tag">5</div>
+          <h3>Kubernetes</h3>
+          <p>Authenticated API and RBAC context for workload identity and runtime reachability.</p>
+        </div>
+        <div class="card">
+          <div class="tag">Distinction</div>
+          <h3>Adapter ≠ integration</h3>
+          <p>A connector reads <code>INTEGRATED</code> only after real credentials and a live
+             authenticated provider path are verified. Until then it stays <code>BLOCKED</code>,
+             <code>UNKNOWN</code> or <code>UNMEASURABLE</code>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="evidence">
+    <div class="wrap">
+      <h2>Evidence controls, not marketing labels</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="tag">REO</div>
+          <h3>Retest, then prove</h3>
+          <p>Evidence-backed retesting of a real reachable or exploitable condition, plus proof of the
+             resulting security state.</p>
+        </div>
+        <div class="card">
+          <div class="tag">RIO</div>
+          <h3>No invented numbers</h3>
+          <p>Observed security outcomes are kept separate from customer-approved financial assumptions.
+             If the inputs are missing, no financial result is produced.</p>
+        </div>
+        <div class="card">
+          <div class="tag">ROE</div>
+          <h3>Rules of engagement</h3>
+          <p>Authorized validation activity: scope, approvals, evidence and release/runtime testing
+             boundaries.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="bridge">
+    <div class="wrap">
+      <h2>Data Bridge</h2>
+      <p class="lede">
+        The controlled path for authorized external security data entering the control plane:
+      </p>
+      <div class="loop">
+        <span>external source</span><b>→</b><span>source authentication</span><b>→</b>
+        <span>tenant binding</span><b>→</b><span>validation</span><b>→</b><span>normalization</span><b>→</b>
+        <span>idempotent persistence</span><b>→</b><span>audit evidence</span><b>→</b><span>ObservedSignal</span>
+      </div>
+      <div class="chips">
+        <span>WEBHOOK</span><span>REST_PULL</span><span>EVENT_STREAM</span><span>MCP</span><span>CUSTOM</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="truth">
+    <div class="wrap">
+      <h2>Production truth</h2>
+      <p class="lede">Production mode uses real connected records only.</p>
+      <div class="grid">
+        <div class="card">
+          <div class="tag">Never</div>
+          <h3>No mock data</h3>
+          <ul>
+            <li>No fake telemetry or synthetic operational metrics</li>
+            <li>No simulated events presented as real</li>
+            <li>No placeholder success states</li>
+            <li>No invented customers, findings, savings or rankings</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="tag">Always</div>
+          <h3>Unknown stays unknown</h3>
+          <p>Missing or unavailable evidence remains <code>UNKNOWN</code>,
+             <code>UNMEASURABLE</code> or <code>INSUFFICIENT_REACH</code> as appropriate — visible in the
+             product, not smoothed over in a summary.</p>
+        </div>
+        <div class="card">
+          <div class="tag">Deploy</div>
+          <h3>No seeded state</h3>
+          <p>The repository seeds nothing on startup. Empty or disconnected production state stays
+             empty or explicitly unavailable until you supply <code>DATABASE_URL</code>, run migrations
+             and verify the connected tenant path.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="api">
+    <div class="wrap">
+      <h2>Core endpoints</h2>
+      <p class="lede">The connected path is inspectable — these are the surfaces that prove it.</p>
+      <ul class="endpoints">
+        <li><b>GET</b> /api/health — database readiness</li>
+        <li><b>GET</b> /api/security/skills — governed security skills</li>
+        <li><b>POST</b> /api/security/decision — authenticated policy evaluation and persistence</li>
+        <li><b>POST</b> /api/data-bridge/ingest — authenticated security-event ingestion</li>
+        <li><b>GET</b> /api/data-bridge/observe — normalized observed signals</li>
+        <li><b>GET</b> /api/data-bridge/health — bridge health for an authorized tenant</li>
+        <li><b>GET</b> /api/data-bridge/adapters — connector capability manifest</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="proof">
+    <div class="wrap">
+      <h2>Proof you can open</h2>
+      <p class="lede">No logos, no testimonials, no invented customer counts. Code and a vendor report.</p>
+      <div class="work">
+        <a href="https://github.com/terrell0780/Elitze-Secure">
+          <b>Elitze-Secure →</b>
+          <span>Public control-plane repository: Supabase Auth, Postgres RLS tenant isolation, TOTP MFA,
+                live health checks, persisted security-test requests. No demo users, no fabricated
+                telemetry.</span>
+        </a>
+        <a href="https://github.com/terrell0780/servicedesk-demo">
+          <b>ServiceDesk API →</b>
+          <span>Adjacent engineering proof: FastAPI + SQLite, clients → jobs → invoices, live outstanding
+                balance, database-enforced integrity, 12 tests, one-command Docker build.</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="engagements">
+    <div class="wrap">
+      <h2>Engagements — fixed price</h2>
+      <p class="lede">
+        Where the product doesn't yet fit your stack, the same evidence discipline is available as a
+        review engagement.
+      </p>
       <div class="grid">
         <div class="card">
           <h3>Quick Pass</h3>
           <div class="price">$500 <small>CAD · 3 business days</small></div>
           <ul>
             <li>Static review of the shipped artifact</li>
-            <li>Tool-permission &amp; credential walkthrough</li>
+            <li>Tool-permission and credential walkthrough</li>
             <li>Findings memo with fixes</li>
           </ul>
         </div>
-        <div class="card" style="border-color:#4c2f8a">
-          <h3>Full Review</h3>
+        <div class="card featured">
+          <h3>Full Review <span class="tag small">most chosen</span></h3>
           <div class="price">$1,500 <small>CAD · 7–10 business days</small></div>
           <ul>
             <li>Everything in Quick Pass</li>
             <li>Agent tool-surface threat model</li>
-            <li>Approval / replay / idempotency analysis</li>
-            <li>Validation against your staging env, in scope</li>
-            <li>Prioritised remediation + retest</li>
+            <li>Approval, replay and idempotency analysis</li>
+            <li>Validation against your staging environment, in scope</li>
+            <li>Prioritised remediation plan + retest</li>
           </ul>
         </div>
         <div class="card">
@@ -220,46 +395,30 @@
           <div class="price">from $2,500 <small>CAD · scoped</small></div>
           <ul>
             <li>Implement the prescribed controls</li>
-            <li>Authz gates, output scrubbing, audit logging</li>
+            <li>Authorization gates, output scrubbing, audit logging</li>
             <li>CI checks + regression tests</li>
           </ul>
         </div>
       </div>
-      <p class="note" style="margin-top:22px">
-        <b>How to engage:</b> email with what you're running and what worries you. You get a
-        one-paragraph scope and an exact price — usually same day. Nothing is tested until the scope
-        is written and signed.
+      <p class="note">
+        <b>How to engage:</b> email what you're running and what worries you. You get a one-paragraph
+        scope and an exact price, usually same day. Nothing is tested until the scope is written and
+        agreed.
       </p>
     </div>
   </section>
 
-  <section id="work">
+  <section id="boundary">
     <div class="wrap">
-      <h2>Proof, not claims</h2>
-      <p class="lede">Both of these you can open and run right now.</p>
-      <div class="work">
-        <a href="https://github.com/terrell0780/servicedesk-demo">
-          <b>ServiceDesk API →</b>
-          <span>FastAPI + SQLite billing-adjacent backend: clients → jobs → invoices, live outstanding
-                balance, 12 passing tests, one-command Docker build.</span>
-        </a>
-        <a href="https://github.com/terrell0780/Elitze-Secure">
-          <b>Elitze-Secure →</b>
-          <span>Agentic security tooling: multi-agent fleet, TLS/header analysis, compliance-gated
-                outbound actions with a human approval gate on every send.</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <h2>How it runs</h2>
-      <div class="steps">
-        <div class="step"><b>1 · Scope call (30 min)</b>What you run, what worries you, what's out of bounds. Written scope follows the call.</div>
-        <div class="step"><b>2 · Review</b>Static analysis and manual review of the agent/tool paths. Findings written as they're found.</div>
-        <div class="step"><b>3 · Report &amp; retest</b>Severity-ranked, reproduction steps, a fix per finding, then a retest of the fixes.</div>
-      </div>
+      <h2>The security boundary</h2>
+      <p class="quote">
+        The model or agent is not the security boundary. Identity, policy, authorization, execution
+        controls, evidence and verified runtime outcomes form the boundary.
+      </p>
+      <p class="note">
+        <b>Scope discipline:</b> nothing is scanned, probed or tested without written authorization and a
+        defined scope. Unsolicited testing is not a service I offer — to anyone.
+      </p>
     </div>
   </section>
 
@@ -267,33 +426,32 @@
     <div class="wrap">
       <h2>Talk to a human</h2>
       <p class="lede">
-        Elitze is run by Terrell Hall in Victoria, BC. Email reaches me directly — no form, no funnel.
+        Elitze Agentic Security is run by Terrell Hall in Victoria, BC. Email reaches me directly — no
+        form, no funnel, no chatbot.
       </p>
       <div class="cta">
-        <a class="btn primary" href="mailto:terrell0780@gmail.com?subject=Elitze%20—%20security%20review">terrell0780@gmail.com</a>
+        <a class="btn primary" href="mailto:terrell0780@gmail.com?subject=Elitze%20—%20scope%20call">terrell0780@gmail.com</a>
         <a class="btn ghost" href="https://github.com/terrell0780">github.com/terrell0780</a>
       </div>
-      <p class="note">
-        <b>Boundary:</b> nothing is scanned, probed or tested without written authorization and a
-        defined scope. Unsolicited testing is not a service I offer — to anyone.
-      </p>
     </div>
   </section>
 </main>
 
 <footer>
   <div class="wrap">
-    <nav>
-      <a href="#product">Product</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#work">Work</a>
+    <nav aria-label="Footer">
+      <a href="#loop">Control loop</a>
+      <a href="#surface">What it governs</a>
+      <a href="#proof">Proof</a>
+      <a href="#engagements">Engagements</a>
       <a href="https://www.elitze.info/docs">Docs</a>
       <a href="https://www.elitze.info/faq">FAQ</a>
       <a href="mailto:terrell0780@gmail.com">Contact</a>
     </nav>
     <div>
       Elitze Agentic Security · Terrell Hall · Victoria, BC, Canada · Interac e-Transfer · invoices net 7<br>
-      © <span id="yr">2026</span> Elitze. All rights reserved.
+      © <span id="yr">2026</span> Elitze Agentic Security. Claims on this page describe what is available at
+      the destination; nothing here implies endorsement, ranking or partnership.
     </div>
   </div>
 </footer>
