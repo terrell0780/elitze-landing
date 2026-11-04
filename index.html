@@ -3,17 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Elitze Agentic Security — agent identity &amp; MCP runtime security</title>
-<meta name="description" content="Discover every agent and MCP server, map what each identity can reach, enforce policy before sensitive tool execution, and keep verifiable evidence of every decision.">
-<meta property="og:title" content="Elitze Agentic Security — agent identity &amp; MCP runtime security">
-<meta property="og:description" content="Discover agents and MCP servers, map reach, enforce policy before tool execution, prove it with evidence.">
+<title>Elitze Agentic Security — agent &amp; MCP control plane, CVE, pentest</title>
+<meta name="description" content="One control plane for agent and MCP identity, CVE/CISA KEV/EPSS intelligence, threat detection, adversary emulation, authorized pentesting, and tamper-evident evidence of every decision.">
+<meta property="og:title" content="Elitze Agentic Security — control plane for agents, CVEs and pentests">
+<meta property="og:description" content="Discover agents and MCP servers, map reach, enforce policy before tool execution, run authorized validation, prove it with evidence.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#04121c">
 <style>
   :root{
-    --deep:#04121c; --navy:#072438; --navy2:#061c2c; --teal:#0e7490; --teal-d:#0b5c73;
-    --aqua:#22d3ee; --foam:#a5f3fc; --sand:#fcd34d; --ink:#e8f6ff; --muted:#8fb3c7;
-    --line:#12384f; --ok:#34d399; --max:1100px;
+    --deep:#04121c; --navy2:#061c2c; --teal:#0e7490; --aqua:#22d3ee; --foam:#a5f3fc;
+    --sand:#fcd34d; --ink:#e8f6ff; --muted:#8fb3c7; --line:#12384f; --ok:#34d399; --max:1120px;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -23,16 +22,15 @@
     background:
       radial-gradient(1100px 620px at 12% -8%, #0b3a51 0%, transparent 58%),
       radial-gradient(900px 520px at 88% 4%, #0a2c46 0%, transparent 62%),
-      linear-gradient(180deg, var(--deep) 0%, var(--navy2) 40%, var(--deep) 100%);
-    background-attachment:fixed;
-    -webkit-font-smoothing:antialiased;
+      linear-gradient(180deg, var(--deep) 0%, var(--navy2) 42%, var(--deep) 100%);
+    background-attachment:fixed;-webkit-font-smoothing:antialiased;
   }
   a{color:var(--foam);text-decoration:none}
   a:hover{text-decoration:underline}
   code{font:13px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--sand);background:#07283a;padding:1px 5px;border-radius:5px}
   .wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
 
-  header{position:sticky;top:0;z-index:30;background:rgba(4,18,28,.82);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+  header{position:sticky;top:0;z-index:30;background:rgba(4,18,28,.84);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
   .bar{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
   .logo{font-weight:800;letter-spacing:.6px;font-size:18px}
   .logo i{font-style:normal;color:var(--aqua)}
@@ -40,89 +38,77 @@
   nav{display:flex;gap:20px;align-items:center}
   nav a{color:var(--muted);font-size:14.5px}
   nav a:hover{color:var(--ink);text-decoration:none}
-  .btn{display:inline-block;padding:11px 18px;border-radius:12px;font-weight:650;font-size:14.5px;border:1px solid transparent;transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease}
+  .btn{display:inline-block;padding:11px 18px;border-radius:12px;font-weight:650;font-size:14.5px;border:1px solid transparent;transition:transform .18s,box-shadow .18s,border-color .18s}
   .btn:hover{transform:translateY(-1px)}
-  .btn.primary{background:linear-gradient(135deg,var(--teal) 0%, var(--aqua) 100%);color:#03151f;box-shadow:0 14px 34px -16px var(--aqua)}
+  .btn.primary{background:linear-gradient(135deg,var(--teal),var(--aqua));color:#03151f;box-shadow:0 14px 34px -16px var(--aqua)}
   .btn.ghost{border-color:#1a4a63;color:var(--ink);background:rgba(14,116,144,.08)}
-  .btn.ghost:hover{border-color:var(--teal)}
   .btn.google{background:#fff;color:#1f2937;border-color:#e5e7eb}
   .btn.github{background:#0f172a;color:#e8f6ff;border-color:#1e293b}
-  @media (max-width:980px){ nav .hide-md{display:none} }
+  @media (max-width:1000px){ nav .hide-md{display:none} }
 
-  .hero{padding:78px 0 46px}
+  .hero{padding:74px 0 42px}
   .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
     color:var(--muted);border:1px solid var(--line);padding:6px 12px;border-radius:999px;margin-bottom:22px;background:rgba(14,116,144,.10)}
   .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok)}
-  h1{font-size:clamp(32px,5.2vw,56px);line-height:1.07;margin:0 0 18px;letter-spacing:-.6px}
+  h1{font-size:clamp(32px,5vw,54px);line-height:1.07;margin:0 0 18px;letter-spacing:-.6px}
   h1 em{font-style:normal;background:linear-gradient(90deg,var(--foam),var(--aqua));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .sub{font-size:clamp(16px,2vw,19px);color:#a9c7d6;max-width:64ch;margin:0 0 28px}
+  .sub{font-size:clamp(16px,2vw,19px);color:#a9c7d6;max-width:66ch;margin:0 0 26px}
   .cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
   .signin{font-size:13.5px;color:var(--muted)}
-  .facts{display:flex;gap:22px;flex-wrap:wrap;color:var(--muted);font-size:13.5px;border-top:1px solid var(--line);padding-top:20px;margin-top:28px}
+  .facts{display:flex;gap:22px;flex-wrap:wrap;color:var(--muted);font-size:13.5px;border-top:1px solid var(--line);padding-top:20px;margin-top:26px}
 
-  section{padding:58px 0;border-top:1px solid var(--line)}
+  section{padding:56px 0;border-top:1px solid var(--line)}
   h2{font-size:clamp(22px,3vw,32px);margin:0 0 10px;letter-spacing:-.3px}
-  h3{font-size:17px;margin:0 0 8px}
+  h3{font-size:16.5px;margin:0 0 8px}
   .lede{color:#a9c7d6;max-width:70ch;margin:0 0 26px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:16px}
-  .card{
-    background:linear-gradient(180deg, rgba(9,44,64,.72), rgba(6,28,44,.86));
-    border:1px solid var(--line);border-radius:16px;padding:20px;
-    box-shadow:0 20px 40px -32px #000; transition:border-color .2s ease, transform .2s ease;
-  }
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+  .card{background:linear-gradient(180deg,rgba(9,44,64,.72),rgba(6,28,44,.86));border:1px solid var(--line);
+    border-radius:16px;padding:18px;box-shadow:0 20px 40px -32px #000;transition:border-color .2s,transform .2s}
   .card:hover{border-color:#1c5c79;transform:translateY(-2px)}
-  .card p{margin:0;color:#a9c7d6;font-size:14.5px}
-  .card ul{margin:12px 0 0 18px;padding:0;color:#a9c7d6;font-size:14.5px}
-  .card li{margin:5px 0}
+  .card p{margin:0;color:#a9c7d6;font-size:14px}
+  .card ul{margin:10px 0 0 18px;padding:0;color:#a9c7d6;font-size:14px}
+  .card li{margin:4px 0}
   .tag{font-size:11.5px;color:var(--aqua);letter-spacing:.08em;text-transform:uppercase}
   .tag.small{font-size:11px}
 
-  .loop{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:22px 0 18px}
-  .loop span{font:12.5px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink);
-    border:1px solid #17506b;background:rgba(9,44,64,.7);padding:7px 11px;border-radius:10px}
+  .loop{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:20px 0 16px}
+  .loop span{font:12.5px ui-monospace,Menlo,monospace;color:var(--ink);border:1px solid #17506b;
+    background:rgba(9,44,64,.7);padding:7px 11px;border-radius:10px}
   .loop b{color:var(--aqua);font-weight:600;font-size:12.5px}
 
-  .steps{counter-reset:step;display:grid;gap:14px}
-  .step{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start;
-    border:1px solid var(--line);border-radius:14px;padding:16px 18px;background:rgba(7,36,56,.55)}
-  .step::before{counter-increment:step;content:counter(step);display:grid;place-items:center;
-    width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--teal),var(--aqua));
-    color:#03151f;font-weight:800;font-size:14px}
-  .step b{display:block;margin-bottom:3px}
-  .step span{color:#a9c7d6;font-size:14.5px}
+  .steps{counter-reset:step;display:grid;gap:12px}
+  .step{display:grid;grid-template-columns:40px 1fr;gap:14px;border:1px solid var(--line);border-radius:14px;padding:15px 17px;background:rgba(7,36,56,.55)}
+  .step::before{counter-increment:step;content:counter(step);display:grid;place-items:center;width:32px;height:32px;
+    border-radius:9px;background:linear-gradient(135deg,var(--teal),var(--aqua));color:#03151f;font-weight:800;font-size:13.5px}
+  .step b{display:block;margin-bottom:2px}
+  .step span{color:#a9c7d6;font-size:14px}
 
-  .price{font-size:28px;font-weight:800;color:var(--sand);margin:10px 0 4px}
-  .price small{font-size:13px;color:var(--muted);font-weight:500}
-  .card.featured{border-color:#1c6f8e;box-shadow:0 0 0 1px rgba(34,211,238,.18), 0 24px 50px -34px var(--aqua)}
-
-  .pay{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
-  .pay span{font-size:13.5px;color:var(--ink);border:1px solid #17506b;border-radius:999px;padding:7px 13px;background:rgba(14,116,144,.14)}
+  .price{font-size:26px;font-weight:800;color:var(--sand);margin:8px 0 4px}
+  .price small{font-size:12.5px;color:var(--muted);font-weight:500}
+  .card.featured{border-color:#1c6f8e;box-shadow:0 0 0 1px rgba(34,211,238,.18),0 24px 50px -34px var(--aqua)}
+  .pay{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+  .pay span{font-size:13px;color:var(--ink);border:1px solid #17506b;border-radius:999px;padding:6px 12px;background:rgba(14,116,144,.14)}
   .pay span b{color:var(--foam);font-weight:650}
 
-  details{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px;background:rgba(7,36,56,.5)}
+  details{border:1px solid var(--line);border-radius:12px;padding:13px 16px;margin-bottom:9px;background:rgba(7,36,56,.5)}
   details[open]{border-color:#1c5c79}
   summary{cursor:pointer;font-weight:650;list-style:none}
   summary::-webkit-details-marker{display:none}
   summary::after{content:"+";float:right;color:var(--aqua);font-weight:700}
   details[open] summary::after{content:"–"}
-  details p{margin:10px 0 0;color:#a9c7d6;font-size:14.5px}
+  details p{margin:9px 0 0;color:#a9c7d6;font-size:14px}
 
-  .quote{border-left:3px solid var(--aqua);padding:4px 0 4px 18px;margin:0 0 18px;font-size:clamp(19px,2.4vw,24px);line-height:1.4}
-  .note{background:rgba(7,36,56,.6);border:1px dashed #1c5c79;border-radius:14px;padding:18px 20px;color:#a9c7d6;font-size:14.5px}
+  .quote{border-left:3px solid var(--aqua);padding:4px 0 4px 18px;margin:0 0 18px;font-size:clamp(18px,2.3vw,23px);line-height:1.42}
+  .note{background:rgba(7,36,56,.6);border:1px dashed #1c5c79;border-radius:14px;padding:17px 19px;color:#a9c7d6;font-size:14px}
   .note b{color:var(--sand)}
-  .work{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
-  .work a{display:block;border:1px solid var(--line);border-radius:15px;padding:18px;color:var(--ink);background:rgba(7,36,56,.5);transition:border-color .2s ease}
+  .work{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+  .work a{display:block;border:1px solid var(--line);border-radius:15px;padding:17px;color:var(--ink);background:rgba(7,36,56,.5);transition:border-color .2s}
   .work a:hover{border-color:var(--teal);text-decoration:none}
-  .work b{font-size:15.5px}
-  .work span{display:block;color:#a9c7d6;font-size:14px;margin-top:6px}
-
-  .login{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-  .mt-6{margin-top:6px}
-  .mt-16{margin-top:16px}
-  .mt-18{margin-top:18px}
-  .mt-22{margin-top:22px}
-  .mt-28{margin-top:28px}
-  footer{padding:42px 0 66px;color:#6f93a8;font-size:13px;border-top:1px solid var(--line)}
+  .work b{font-size:15px}
+  .work span{display:block;color:#a9c7d6;font-size:13.5px;margin-top:6px}
+  .login{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+  .mt-6{margin-top:6px}.mt-16{margin-top:16px}.mt-18{margin-top:18px}.mt-22{margin-top:22px}.mt-28{margin-top:28px}
+  footer{padding:40px 0 64px;color:#6f93a8;font-size:13px;border-top:1px solid var(--line)}
   footer nav{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:16px}
   footer a{color:#8fb3c7}
 </style>
@@ -133,11 +119,12 @@
   <div class="wrap bar">
     <div class="logo">ELITZE<i>.</i> <span class="brand-sub">Agentic Security</span></div>
     <nav aria-label="Main">
-      <a href="#loop" class="hide-md">Product</a>
-      <a href="#how" class="hide-md">How it works</a>
+      <a href="#platform" class="hide-md">Platform</a>
+      <a href="#modules" class="hide-md">Modules</a>
+      <a href="#compare" class="hide-md">Compare</a>
       <a href="#plans" class="hide-md">Plans</a>
       <a href="#faq" class="hide-md">FAQ</a>
-      <a href="#contact" class="btn primary">Request a scope call</a>
+      <a href="#contact" class="btn primary">Request access</a>
     </nav>
   </div>
 </header>
@@ -145,73 +132,124 @@
 <main>
   <div class="wrap hero">
     <div class="eyebrow"><span class="dot"></span> Victoria, BC · remote across Canada &amp; the US</div>
-    <h1>Your agents can take action.<br><em>Can you prove they were allowed to?</em></h1>
+    <h1>One control plane for agents, MCP servers<br><em>and the vulnerabilities they can reach.</em></h1>
     <p class="sub">
-      Elitze Agentic Security discovers every agent and MCP server, maps what each identity can reach,
-      enforces policy before sensitive tool execution, and keeps verifiable evidence of every decision —
-      the whole chain, not a dashboard that says “secure”.
+      Elitze Agentic Security discovers agents and MCP servers, maps identity-to-capability reach,
+      enforces policy before sensitive tool execution, runs authorized validation — CVE intelligence,
+      threat detection, adversary emulation, pentesting — and keeps tamper-evident evidence of every
+      decision and every retest.
     </p>
     <div class="cta">
-      <a class="btn primary" href="mailto:terrell0780@gmail.com?subject=Elitze%20—%20scope%20call">Request a scope call</a>
-      <a class="btn ghost" href="#how">See how it works</a>
-      <span class="signin">Existing tenant? <a href="https://www.elitze.info/login">Sign in →</a></span>
+      <a class="btn primary" href="mailto:terrell0780@gmail.com?subject=Elitze%20—%20access%20request">Request access</a>
+      <a class="btn ghost" href="#modules">See the modules</a>
+      <span class="signin">Tenant? <a href="https://www.elitze.info/login">Sign in →</a></span>
     </div>
     <div class="login">
       <a class="btn google" href="https://www.elitze.info/login?provider=google">Continue with Google</a>
       <a class="btn github" href="https://www.elitze.info/login?provider=github">Continue with GitHub</a>
     </div>
     <div class="facts">
-      <span>Fixed price agreed in writing</span>
-      <span>Interac e-Transfer · KOHO deposit</span>
-      <span>Authorized scope only</span>
+      <span>Agent &amp; MCP identity control plane</span>
+      <span>CVE · CISA KEV · EPSS intelligence</span>
+      <span>Authorized pentesting &amp; adversary emulation</span>
     </div>
   </div>
 
-  <section id="loop">
+  <section id="platform">
     <div class="wrap">
       <h2>The control loop</h2>
-      <p class="lede">Nine steps, in order. Each one leaves a tenant-scoped record: the authorization decision, the execution result, the retest result, the evidence.</p>
+      <p class="lede">Nine steps, in order. Each leaves a tenant-scoped record: the authorization decision, the execution result, the retest result, the evidence.</p>
       <div class="loop">
         <span>Discover</span><b>→</b><span>Identify</span><b>→</b><span>Map Reach</span><b>→</b>
         <span>Evaluate Policy</span><b>→</b><span>Decide</span><b>→</b><span>Authorize Execution</span><b>→</b>
         <span>Observe</span><b>→</b><span>Retest</span><b>→</b><span>Prove</span>
       </div>
+      <p class="note">
+        A dashboard changing state is not the control. The tenant record, the authorization decision, the
+        execution result, the retest result and the evidence must exist in the connected path — otherwise it
+        reads <code>UNKNOWN</code>, <code>UNMEASURABLE</code> or <code>INSUFFICIENT_REACH</code>.
+      </p>
+    </div>
+  </section>
+
+  <section id="modules">
+    <div class="wrap">
+      <h2>The platform, module by module</h2>
+      <p class="lede">Everything below is a surface inside the workspace at elitze.info — not a menu of services.</p>
       <div class="grid">
         <div class="card">
-          <div class="tag">Inventory &amp; reach</div>
-          <h3>Agents, MCP servers, tools</h3>
-          <p>Agent and MCP tool inventory, non-human identity, identity-to-capability mapping, and what secrets or sensitive data each identity can actually reach.</p>
+          <div class="tag">Investigate</div>
+          <h3>Command center</h3>
+          <p>Tenant metrics, security graph and work queue in one view.</p>
         </div>
         <div class="card">
-          <div class="tag">Enforcement</div>
-          <h3>Before the tool runs</h3>
-          <p>Policy evaluated before sensitive tool execution, approval boundaries for high-impact actions, and separately authorized gateway execution.</p>
+          <div class="tag">Investigate</div>
+          <h3>Security graph</h3>
+          <p>Observed assets, relationships and attack paths across identity, cloud and network surfaces.</p>
+        </div>
+        <div class="card">
+          <div class="tag">Investigate</div>
+          <h3>Agentic SOC</h3>
+          <p>Bounded, policy-governed analysis over eligible observed events.</p>
+        </div>
+        <div class="card">
+          <div class="tag">Investigate</div>
+          <h3>SOC analyst &amp; threat detection</h3>
+          <p>Investigate tenant evidence and findings; review source-attributed detections with response evidence.</p>
+        </div>
+        <div class="card">
+          <div class="tag">Validate</div>
+          <h3>Vulnerability intelligence</h3>
+          <p>CVE, CISA KEV and EPSS lookups tied to the assets and identities you actually run.</p>
+        </div>
+        <div class="card">
+          <div class="tag">Validate</div>
+          <h3>Adversary emulation</h3>
+          <p>Scope-bound validation workflows that prove a control holds — inside written authorization.</p>
+        </div>
+        <div class="card">
+          <div class="tag">Validate</div>
+          <h3>Pentesting</h3>
+          <p>Authorized test workflows against your own environment, with evidence captured per action.</p>
+        </div>
+        <div class="card">
+          <div class="tag">Operate</div>
+          <h3>Integrations</h3>
+          <p>Provider adapters: MCP gateway/server, GitHub + Actions, AWS IAM + CloudTrail, Entra ID + Azure, Kubernetes.</p>
+        </div>
+        <div class="card">
+          <div class="tag">Operate</div>
+          <h3>Organization &amp; security skills</h3>
+          <p>Members and roles, plus the governed capability list with its tool boundaries.</p>
         </div>
         <div class="card">
           <div class="tag">Evidence</div>
-          <h3>After it runs</h3>
-          <p>Tamper-evident decision evidence, observed runtime outcomes, and retesting that closes the loop with proof rather than a status label.</p>
+          <h3>Production readiness &amp; security value</h3>
+          <p>Release gates, dependency and evidence gaps, and the value inputs with their evidence states.</p>
+        </div>
+        <div class="card">
+          <div class="tag">Work</div>
+          <h3>Governed chat, recursive agents, orchestration</h3>
+          <p>Tenant-scoped chat and bounded multi-step agent workflows under policy-governed orchestration.</p>
+        </div>
+        <div class="card">
+          <div class="tag">Learn</div>
+          <h3>Docs, how-to, FAQ</h3>
+          <p>Operating boundaries, step-by-step investigation and release workflows.</p>
         </div>
       </div>
-      <p class="note mt-18">
-        <b>Five ecosystems, real adapter paths:</b> MCP gateway/server · GitHub + Actions · AWS IAM +
-        CloudTrail · Microsoft Entra ID + Azure · Kubernetes. A connector reads <code>INTEGRATED</code>
-        only after a live authenticated provider path is verified — until then it stays
-        <code>BLOCKED</code>, <code>UNKNOWN</code> or <code>UNMEASURABLE</code>.
-      </p>
     </div>
   </section>
 
   <section id="how">
     <div class="wrap">
-      <h2>How it works</h2>
-      <p class="lede">Five steps from first email to an evidence pack your auditor can read.</p>
+      <h2>How a deployment runs</h2>
       <div class="steps">
-        <div class="step"><div><b>1 · Scope call (30 minutes)</b><span>What you run, which agents and MCP servers matter, what is out of bounds. You leave with a written scope and an exact price.</span></div></div>
-        <div class="step"><div><b>2 · Written scope</b><span>In-scope systems, out-of-scope surfaces, environments, timeline, and the authorization statement. Nothing is touched before this exists.</span></div></div>
-        <div class="step"><div><b>3 · Connect, read-only first</b><span>Adapters attach with read-only credentials: inventory, identity, reachability. You provide credentials with the narrowest possible scope; we verify the path is live before claiming anything.</span></div></div>
-        <div class="step"><div><b>4 · Enforce &amp; observe</b><span>Policy is evaluated before sensitive tool execution. Every decision, execution and outcome is recorded — including the ones that fail.</span></div></div>
-        <div class="step"><div><b>5 · Retest &amp; evidence pack</b><span>Fixes are retested against the real condition, and you receive the evidence trail: decision, execution, retest, closure — in an export you can hand to an auditor.</span></div></div>
+        <div class="step"><div><b>1 · Scope</b><span>Written scope: tenants, adapters, environments, out-of-bounds surfaces, authorization statement.</span></div></div>
+        <div class="step"><div><b>2 · Connect</b><span>Adapters attach read-only first. A connector reads <code>INTEGRATED</code> only after a live authenticated path is verified.</span></div></div>
+        <div class="step"><div><b>3 · Map &amp; enforce</b><span>Agent and MCP inventory, identity reachability, then policy enforcement before sensitive tool execution.</span></div></div>
+        <div class="step"><div><b>4 · Validate</b><span>CVE exposure, adversary emulation and pentesting run only inside the authorized scope, with per-action evidence.</span></div></div>
+        <div class="step"><div><b>5 · Retest &amp; prove</b><span>Fixes are retested against the real condition; you get the evidence trail — decision, execution, retest, closure.</span></div></div>
       </div>
     </div>
   </section>
@@ -219,14 +257,14 @@
   <section id="plans">
     <div class="wrap">
       <h2>Plans</h2>
-      <p class="lede">Start with a pilot on one control path. Expand to a deployment. Enterprise terms when your security reviewer needs them.</p>
+      <p class="lede">Pilot one control path. Expand to a full deployment. Enterprise terms when your reviewer needs them.</p>
       <div class="grid">
         <div class="card">
           <div class="tag">Pilot</div>
           <h3>One control path, 30 days</h3>
           <div class="price">$500 <small>CAD · 30-day pilot</small></div>
           <ul>
-            <li>One tenant, one ecosystem adapter (MCP or GitHub)</li>
+            <li>One tenant, one adapter (MCP or GitHub)</li>
             <li>Agent &amp; MCP inventory + reachability map</li>
             <li>Read-only collection, written scope</li>
             <li>Evidence pack at day 30</li>
@@ -237,11 +275,11 @@
           <h3>Full loop, enforced</h3>
           <div class="price">$1,500 <small>CAD · 7–10 business days</small></div>
           <ul>
-            <li>All five adapters you need, live-verified</li>
+            <li>All adapters you need, live-verified</li>
             <li>Policy enforcement before sensitive tool execution</li>
-            <li>Approval boundaries + replay/idempotency review</li>
-            <li>Runtime observation and retest with evidence</li>
-            <li>Remediation plan, then retest of the fixes</li>
+            <li>CVE/KEV/EPSS exposure over your real assets</li>
+            <li>Adversary emulation + authorized pentest workflows</li>
+            <li>Retest and evidence export</li>
           </ul>
         </div>
         <div class="card">
@@ -256,7 +294,6 @@
           </ul>
         </div>
       </div>
-
       <h3 class="mt-28">Payment</h3>
       <div class="pay">
         <span><b>Interac e-Transfer</b> — CAD, preferred</span>
@@ -264,13 +301,73 @@
         <span><b>Google Pay</b> — via merchant processor (being enabled)</span>
       </div>
       <p class="note mt-16">
-        <b>Straight answer on Google Pay:</b> Google Pay is a wallet, not a payment rail — accepting it
-        requires a merchant processor (Stripe/Adyen class) and their identity verification. That is in
-        progress; until it clears, Interac e-Transfer and KOHO deposit are the working rails.
-        <br><br>
-        <b>US clients:</b> Interac does not cross the border. For US engagements, use
-        <a href="mailto:tsh_cook@hotmail.com">tsh_cook@hotmail.com</a> and we will settle by wire to the
-        KOHO account or another method agreed in the scope.
+        <b>Straight answer on Google Pay:</b> it is a wallet, not a rail — accepting it needs a merchant
+        processor and its identity verification. That is in progress; Interac e-Transfer and KOHO deposit
+        work today. <b>US clients:</b> Interac does not cross the border — use
+        <a href="mailto:tsh_cook@hotmail.com">tsh_cook@hotmail.com</a> for settlement arrangements.
+      </p>
+    </div>
+  </section>
+
+  <section id="compare">
+    <div class="wrap">
+      <h2>How it compares</h2>
+      <p class="lede">
+        The four platforms buyers rate highest are endpoint and cloud security leaders. They are excellent at
+        what they cover — and none of them was built around the agent/MCP control path. That gap is the product.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <div class="tag">CrowdStrike · 4.8★</div>
+          <h3>Endpoint + XDR leader</h3>
+          <p>Best-in-class endpoint telemetry, threat intel and agentic SOC. Coverage starts at the host; agents calling MCP tools inside your app are outside its sensor.</p>
+        </div>
+        <div class="card">
+          <div class="tag">Palo Alto · 4.5★</div>
+          <h3>Network + CNAPP</h3>
+          <p>Strong network enforcement and cloud posture (Prisma). Policy is network/cloud-shaped, not tool-call-shaped.</p>
+        </div>
+        <div class="card">
+          <div class="tag">Microsoft</div>
+          <h3>Defender + Entra</h3>
+          <p>Closest on agent identity (Entra Agent ID) — but you must live inside the Microsoft estate to get it, and evidence stays in their portal.</p>
+        </div>
+        <div class="card">
+          <div class="tag">SentinelOne</div>
+          <h3>Endpoint + AI SOC</h3>
+          <p>Strong autonomous triage at the endpoint. Same boundary: host-first, not tool-call-first.</p>
+        </div>
+      </div>
+
+      <div class="grid mt-22">
+        <div class="card featured">
+          <div class="tag">Where Elitze wins</div>
+          <h3>Tool-call shaped</h3>
+          <ul>
+            <li>Agent &amp; MCP inventory with identity→capability reach</li>
+            <li>Policy evaluated <b>before</b> the tool executes</li>
+            <li>Approval, replay and idempotency treated as first-class controls</li>
+            <li>Tamper-evident decision evidence you can export</li>
+            <li>Fixed price, one control path, 30-day pilot</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="tag">Where they win</div>
+          <h3>Scale and certification</h3>
+          <ul>
+            <li>Endpoint, network and cloud coverage at enterprise scale</li>
+            <li>SOC 2 Type II, ISO 27001, FedRAMP, published pen-test summaries</li>
+            <li>24/7 managed response and global support</li>
+            <li>Years of threat-intel corpus and brand trust</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="note mt-16">
+        <b>Honest position:</b> Elitze does not replace CrowdStrike, Palo Alto, Microsoft or SentinelOne, and
+        this page does not claim to. It covers the agent/MCP control path those platforms were not built
+        around, and it runs alongside them. <b>Certifications:</b> none held yet — see
+        <a href="trust.html">trust &amp; security</a> for exactly what is and is not in place.
       </p>
     </div>
   </section>
@@ -278,17 +375,18 @@
   <section id="proof">
     <div class="wrap">
       <h2>Proof, not claims</h2>
-      <p class="lede">No logos, no testimonials, no invented customer counts.</p>
       <div class="work">
         <a href="https://github.com/terrell0780/Elitze-Secure">
           <b>Elitze-Secure →</b>
-          <span>Public control-plane repository: Supabase Auth, Postgres RLS tenant isolation, TOTP MFA,
-                live health checks, persisted security-test requests.</span>
+          <span>Public control-plane repository: Supabase Auth, Postgres RLS tenant isolation, TOTP MFA, live health checks, persisted security-test requests.</span>
         </a>
         <a href="https://github.com/terrell0780/servicedesk-demo">
           <b>ServiceDesk API →</b>
-          <span>FastAPI + SQLite, clients → jobs → invoices, live outstanding balance, database-enforced
-                integrity, 12 tests, one-command Docker build.</span>
+          <span>Engineering proof: FastAPI + SQLite, database-enforced integrity, 12 tests, one-command Docker build.</span>
+        </a>
+        <a href="trust.html">
+          <b>Trust &amp; security →</b>
+          <span>Subprocessors, tenancy, logging, retention, disclosure policy — including what is not held.</span>
         </a>
       </div>
     </div>
@@ -297,59 +395,33 @@
   <section id="about">
     <div class="wrap">
       <h2>About</h2>
+      <p class="lede">Elitze Agentic Security is a product of <b>TrueElitze Digital</b>, built and operated by Terrell Hall in Victoria, British Columbia.</p>
       <p class="lede">
-        Elitze Agentic Security is a product of <b>TrueElitze Digital</b>, built and operated by
-        Terrell Hall in Victoria, British Columbia.
+        The platform exists because agentic systems broke two assumptions at once: that a human is the one
+        calling tools, and that a passing test means working software. Elitze covers the part that can be
+        evidenced — which identity, reaching which capability, under which policy, with which recorded outcome.
       </p>
       <p class="lede">
-        The product exists because of a specific gap: teams are now deploying agents that can call
-        tools, read data and move money — and the only thing standing between an agent and a bad
-        decision is often a dashboard label. Elitze narrows its commercial proof to the part that can
-        be evidenced: which identity, reaching which capability, under which policy, with which
-        recorded outcome.
+        Two rules shape it. <b>The model is not the security boundary</b> — identity, policy, authorization,
+        execution controls and verified outcomes are. And <b>missing evidence stays missing</b>: no mock data,
+        no synthetic telemetry, no placeholder success states.
       </p>
-      <p class="lede">
-        Two rules shape everything here. First, <b>the model is not the security boundary</b> — identity,
-        policy, authorization, execution controls and verified outcomes are. Second, <b>missing evidence
-        stays missing</b>: no mock data, no synthetic telemetry, no placeholder success states. If a
-        connector is not live, it says so.
-      </p>
-      <div class="grid mt-6">
-        <div class="card">
-          <div class="tag">Built by</div>
-          <h3>Terrell Hall</h3>
-          <p>Victoria, BC. Builds agent systems and audits them before attackers do. Contact:
-             <a href="mailto:terrell0780@gmail.com">terrell0780@gmail.com</a>.</p>
-        </div>
-        <div class="card">
-          <div class="tag">Company</div>
-          <h3>TrueElitze Digital</h3>
-          <p>Sole proprietorship. Fixed-price engagements, written scope, invoices net 7, Interac
-             e-Transfer / KOHO deposit.</p>
-        </div>
-        <div class="card">
-          <div class="tag">Region</div>
-          <h3>Canada &amp; US</h3>
-          <p>Remote across Canada. US engagements handled through
-             <a href="mailto:tsh_cook@hotmail.com">tsh_cook@hotmail.com</a>.</p>
-        </div>
-      </div>
     </div>
   </section>
 
   <section id="faq">
     <div class="wrap">
       <h2>FAQ</h2>
-      <details><summary>Do you need production access?</summary><p>No. Reviews start against the shipped artifact (npm/PyPI package, repo, container) and configuration. Live validation happens only in an environment you nominate, with read-only credentials first and a written scope that names what may be touched.</p></details>
-      <details><summary>What happens if the evidence is incomplete?</summary><p>It stays incomplete and is labelled. Missing data resolves to <code>UNKNOWN</code>, <code>UNMEASURABLE</code> or <code>INSUFFICIENT_REACH</code> — never to a green check. A connector only reads <code>INTEGRATED</code> after a live authenticated path is verified.</p></details>
-      <details><summary>Is this a replacement for Wiz, CrowdStrike or Defender?</summary><p>No. Those cover cloud posture and endpoint telemetry at enterprise scale. Elitze covers the agent and MCP path: which non-human identity can reach which tool, what policy decided, and whether the decision is evidenced. It complements a CNAPP, it does not replace one.</p></details>
-      <details><summary>How is the agent and MCP inventory collected?</summary><p>Through provider adapters — MCP gateway/server discovery, GitHub and Actions, AWS IAM/CloudTrail, Microsoft Graph/Entra, and Kubernetes API/RBAC — using credentials you scope. Each collection is recorded so you can see what was read and when.</p></details>
-      <details><summary>Do you support Google and GitHub sign-in?</summary><p>The workspace is designed for SSO via Google and GitHub. Buttons on this page route to the workspace login; enabling a provider is a configuration step in the identity layer, done per tenant.</p></details>
-      <details><summary>What about data residency and retention?</summary><p>Hosting region, retention window and deletion terms are agreed in the scope before any data is ingested. Evidence exports are yours; you can request deletion at the end of an engagement and receive written confirmation.</p></details>
-      <details><summary>What does it cost, and how do I pay?</summary><p>Pilot $500 CAD (30 days, one control path) · Deployment $1,500 CAD · Enterprise custom. Payment by Interac e-Transfer or KOHO bank deposit; invoices are net 7. Google Pay becomes available once merchant processing clears.</p></details>
-      <details><summary>My database isn’t connected — can we still start?</summary><p>Yes for reviews, which work from the artifact. For the hosted workspace, a live control path needs <code>DATABASE_URL</code>, migrations and a verified tenant connection. Until then the product reports unavailable rather than pretending otherwise.</p></details>
-      <details><summary>Can I hand the output to an auditor?</summary><p>The evidence pack is built for that: decision, execution, retest and closure records with timestamps and tenant binding. It is not a certification and does not claim to be one.</p></details>
-      <details><summary>What is the authorization boundary?</summary><p>Nothing is scanned, probed or tested without written authorization and a defined scope. Unsolicited testing is not a service offered — to anyone.</p></details>
+      <details><summary>Does it scan for CVEs?</summary><p>Yes — vulnerability intelligence covers CVE, CISA KEV and EPSS, tied to the assets and identities you actually run, not a generic feed dump. Findings carry their evidence state.</p></details>
+      <details><summary>Does it do pentesting?</summary><p>Yes, as authorized workflows against your own environment, with scope, approvals and per-action evidence. Unsolicited testing of third parties is not offered — to anyone.</p></details>
+      <details><summary>What is adversary emulation here?</summary><p>Scope-bound validation that proves a control holds: a deny rule that actually denies, an approval that cannot be replayed. It runs only inside written authorization.</p></details>
+      <details><summary>Do you need production access?</summary><p>Read-only credentials first, scoped to the minimum each adapter needs. Live validation happens only in an environment you nominate.</p></details>
+      <details><summary>Is this a replacement for Wiz, CrowdStrike or Defender?</summary><p>No. Those cover cloud posture and endpoint telemetry at enterprise scale. Elitze covers the agent/MCP control path and the evidence that a decision was authorized — it complements a CNAPP.</p></details>
+      <details><summary>How is inventory collected?</summary><p>Provider adapters: MCP gateway/server, GitHub + Actions, AWS IAM + CloudTrail, Microsoft Graph/Entra, Kubernetes API/RBAC. A connector reads <code>INTEGRATED</code> only after a live authenticated path is verified.</p></details>
+      <details><summary>What happens when evidence is missing?</summary><p>It is labelled <code>UNKNOWN</code>, <code>UNMEASURABLE</code> or <code>INSUFFICIENT_REACH</code>. Never a green check.</p></details>
+      <details><summary>Google and GitHub sign-in?</summary><p>Yes — buttons route to the workspace login. Provider enablement is a per-tenant identity configuration step.</p></details>
+      <details><summary>Cost and payment?</summary><p>Pilot $500 CAD (30 days) · Deployment $1,500 CAD · Enterprise custom. Interac e-Transfer or KOHO bank deposit; invoices net 7. Google Pay once merchant processing clears.</p></details>
+      <details><summary>Can I hand the output to an auditor?</summary><p>Yes — decision, execution, retest and closure records with timestamps and tenant binding. It is not a certification and does not claim to be one.</p></details>
     </div>
   </section>
 
@@ -369,7 +441,7 @@
         <div class="card">
           <div class="tag">Canada &amp; general</div>
           <h3><a href="mailto:terrell0780@gmail.com">terrell0780@gmail.com</a></h3>
-          <p>Scope calls, reviews, invoices. Victoria, BC.</p>
+          <p>Access requests, deployments, invoices. Victoria, BC.</p>
         </div>
         <div class="card">
           <div class="tag">United States</div>
@@ -377,9 +449,9 @@
           <p>US engagements and settlement arrangements.</p>
         </div>
         <div class="card">
-          <div class="tag">Code</div>
-          <h3><a href="https://github.com/terrell0780">github.com/terrell0780</a></h3>
-          <p>Control plane, demos and disclosure work.</p>
+          <div class="tag">Security</div>
+          <h3><a href="mailto:security@elitze.info">security@elitze.info</a></h3>
+          <p>Vulnerability disclosure: 48h acknowledgement, 90-day coordination. See <a href="trust.html">trust</a>.</p>
         </div>
       </div>
       <div class="login mt-22">
@@ -394,8 +466,8 @@
 <footer>
   <div class="wrap">
     <nav aria-label="Footer">
-      <a href="#loop">Product</a>
-      <a href="#how">How it works</a>
+      <a href="#platform">Platform</a>
+      <a href="#modules">Modules</a>
       <a href="#plans">Plans</a>
       <a href="#faq">FAQ</a>
       <a href="trust.html">Trust &amp; security</a>
