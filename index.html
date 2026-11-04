@@ -135,7 +135,7 @@
     <nav aria-label="Main">
       <a href="#loop" class="hide-md">Product</a>
       <a href="#how" class="hide-md">How it works</a>
-      <a href="#pricing" class="hide-md">Pricing</a>
+      <a href="#plans" class="hide-md">Plans</a>
       <a href="#faq" class="hide-md">FAQ</a>
       <a href="#contact" class="btn primary">Request a scope call</a>
     </nav>
@@ -216,38 +216,43 @@
     </div>
   </section>
 
-  <section id="pricing">
+  <section id="plans">
     <div class="wrap">
-      <h2>Pricing</h2>
-      <p class="lede">Fixed price, written scope, no retainers. You know the number and the delivery date before work starts.</p>
+      <h2>Plans</h2>
+      <p class="lede">Start with a pilot on one control path. Expand to a deployment. Enterprise terms when your security reviewer needs them.</p>
       <div class="grid">
         <div class="card">
-          <h3>Quick Pass</h3>
-          <div class="price">$500 <small>CAD · 3 business days</small></div>
+          <div class="tag">Pilot</div>
+          <h3>One control path, 30 days</h3>
+          <div class="price">$500 <small>CAD · 30-day pilot</small></div>
           <ul>
-            <li>Static review of the shipped artifact</li>
-            <li>Tool-permission and credential walkthrough</li>
-            <li>Findings memo with fixes</li>
+            <li>One tenant, one ecosystem adapter (MCP or GitHub)</li>
+            <li>Agent &amp; MCP inventory + reachability map</li>
+            <li>Read-only collection, written scope</li>
+            <li>Evidence pack at day 30</li>
           </ul>
         </div>
         <div class="card featured">
-          <h3>Full Review <span class="tag small">most chosen</span></h3>
+          <div class="tag">Deployment <span class="tag small">most chosen</span></div>
+          <h3>Full loop, enforced</h3>
           <div class="price">$1,500 <small>CAD · 7–10 business days</small></div>
           <ul>
-            <li>Everything in Quick Pass</li>
-            <li>Agent &amp; MCP tool-surface threat model</li>
-            <li>Approval, replay and idempotency analysis</li>
-            <li>Validation against your staging environment, in scope</li>
-            <li>Prioritised remediation plan + retest</li>
+            <li>All five adapters you need, live-verified</li>
+            <li>Policy enforcement before sensitive tool execution</li>
+            <li>Approval boundaries + replay/idempotency review</li>
+            <li>Runtime observation and retest with evidence</li>
+            <li>Remediation plan, then retest of the fixes</li>
           </ul>
         </div>
         <div class="card">
-          <h3>Build &amp; Harden</h3>
-          <div class="price">from $2,500 <small>CAD · scoped</small></div>
+          <div class="tag">Enterprise</div>
+          <h3>Terms your reviewer needs</h3>
+          <div class="price">Custom <small>scoped · annual</small></div>
           <ul>
-            <li>Implement the prescribed controls</li>
-            <li>Authorization gates, output scrubbing, audit logging</li>
-            <li>CI checks + regression tests</li>
+            <li>SSO (SAML/OIDC) + SCIM, per-tenant roles</li>
+            <li>DPA, subprocessor annex, SLA with credits</li>
+            <li>Audit-log export and retention controls</li>
+            <li>Named support contact, quarterly evidence review</li>
           </ul>
         </div>
       </div>
@@ -341,7 +346,7 @@
       <details><summary>How is the agent and MCP inventory collected?</summary><p>Through provider adapters — MCP gateway/server discovery, GitHub and Actions, AWS IAM/CloudTrail, Microsoft Graph/Entra, and Kubernetes API/RBAC — using credentials you scope. Each collection is recorded so you can see what was read and when.</p></details>
       <details><summary>Do you support Google and GitHub sign-in?</summary><p>The workspace is designed for SSO via Google and GitHub. Buttons on this page route to the workspace login; enabling a provider is a configuration step in the identity layer, done per tenant.</p></details>
       <details><summary>What about data residency and retention?</summary><p>Hosting region, retention window and deletion terms are agreed in the scope before any data is ingested. Evidence exports are yours; you can request deletion at the end of an engagement and receive written confirmation.</p></details>
-      <details><summary>What does it cost, and how do I pay?</summary><p>Quick Pass $500 CAD · Full Review $1,500 CAD · Build &amp; Harden from $2,500 CAD. Payment by Interac e-Transfer or KOHO bank deposit; invoices are net 7. Google Pay becomes available once merchant processing clears.</p></details>
+      <details><summary>What does it cost, and how do I pay?</summary><p>Pilot $500 CAD (30 days, one control path) · Deployment $1,500 CAD · Enterprise custom. Payment by Interac e-Transfer or KOHO bank deposit; invoices are net 7. Google Pay becomes available once merchant processing clears.</p></details>
       <details><summary>My database isn’t connected — can we still start?</summary><p>Yes for reviews, which work from the artifact. For the hosted workspace, a live control path needs <code>DATABASE_URL</code>, migrations and a verified tenant connection. Until then the product reports unavailable rather than pretending otherwise.</p></details>
       <details><summary>Can I hand the output to an auditor?</summary><p>The evidence pack is built for that: decision, execution, retest and closure records with timestamps and tenant binding. It is not a certification and does not claim to be one.</p></details>
       <details><summary>What is the authorization boundary?</summary><p>Nothing is scanned, probed or tested without written authorization and a defined scope. Unsolicited testing is not a service offered — to anyone.</p></details>
@@ -391,7 +396,7 @@
     <nav aria-label="Footer">
       <a href="#loop">Product</a>
       <a href="#how">How it works</a>
-      <a href="#pricing">Pricing</a>
+      <a href="#plans">Plans</a>
       <a href="#faq">FAQ</a>
       <a href="trust.html">Trust &amp; security</a>
       <a href="https://www.elitze.info/docs">Docs</a>
